@@ -14,6 +14,16 @@ class Product(models.Model):
     archived = models.BooleanField(default=False)
 
 
+    @property
+    def description_short(self):
+        if len(self.description) < 48:
+            return self.description
+        return self.description[:48] + '...'
+
+    def __str__(self):
+        return f'Product(pk={self.pk}, name={self.name!r})'
+
+
 class Order(models.Model):
     delivery_address = models.TextField(null=True, blank=True)
     promocode = models.CharField(max_length=20, null=False, blank=False)
