@@ -33,3 +33,4 @@ def handle_file_upload(request: HttpRequest) -> HttpResponse:
 
 def exception_file_upload(request):
     return render(request, 'requestdataapp/exception-file-upload.html')
+    # TODO и здесь организовывать отдельную функцию не обязательно? чтобы вывести страниу с ошибкой??

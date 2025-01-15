@@ -9,5 +9,5 @@ urlpatterns = [
     path('bio/', user_form, name='user_form'),
     path('upload/', handle_file_upload, name='file_upload'),
     path('upload-exception/', exception_file_upload, name='exception-file-upload'),
-
+    #TODO получается чтобы вывести страницу с ошибкой, не нужно добавлять путь в ulrs??
 ]

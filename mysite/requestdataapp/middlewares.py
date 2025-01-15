@@ -29,8 +29,10 @@ class CountRequestsMiddleware:
     def __call__(self, request: HttpRequest):
         self.requests_count += 1
         print('requests count', self.requests_count)
-        self.throttling_middleware(request)
-        response = self.get_response(request)
+        if self.throttling_middleware(request):
+            response = render(request, 'requestdataapp/exception-throttling_middleware.html')
+        else:
+            response = self.get_response(request)
         self.responses_count += 1
         print('responses count', self.responses_count)
         return response
@@ -42,12 +44,14 @@ class CountRequestsMiddleware:
 
     def throttling_middleware(self, request):
         user_id = request.META['REMOTE_ADDR']
-        print('user id', user_id)
         if user_id in self.users_id_dict:
-            print('DIFFFFF', time() - self.users_id_dict[user_id])
             if time() - self.users_id_dict[user_id] < 5:
-                return render(request, 'requestdataapp/exception-throttling_middleware.html')
-        else:       #TODO  Не понимаю как правильно вызывать ошибки. С файлом вроде получлось, а здесь не знаю как правильно сделать
+                self.users_id_dict[user_id] = time()
+                return True
+            else:
+                self.users_id_dict[user_id] = time()
+                return False
+        else:
             self.users_id_dict[user_id] = time()
-            return True
+            return False
 
