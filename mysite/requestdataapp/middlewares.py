@@ -29,10 +29,11 @@ class CountRequestsMiddleware:
     def __call__(self, request: HttpRequest):
         self.requests_count += 1
         print('requests count', self.requests_count)
-        if self.throttling_middleware(request):
-            response = render(request, 'requestdataapp/exception-throttling_middleware.html')
-        else:
-            response = self.get_response(request)
+        # if self.throttling_middleware(request):      #TODO отключил проверку, потому что срабатывает даже при редиректе
+        #     response = render(request, 'requestdataapp/exception-throttling_middleware.html')
+        # else:
+        #     response = self.get_response(request)
+        response = self.get_response(request)
         self.responses_count += 1
         print('responses count', self.responses_count)
         return response
@@ -44,8 +45,9 @@ class CountRequestsMiddleware:
 
     def throttling_middleware(self, request):
         user_id = request.META['REMOTE_ADDR']
+        wait_sec = 1
         if user_id in self.users_id_dict:
-            if time() - self.users_id_dict[user_id] < 5:
+            if time() - self.users_id_dict[user_id] < wait_sec:
                 self.users_id_dict[user_id] = time()
                 return True
             else:

@@ -8,13 +8,8 @@
 	<h1>Upload file</h1>
     <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <p>
-        <input type="file" name="myfile">
-    </p>
-
-    <p>
-        Max file size 2 Mb
-    </p>
+    {{ form.as_p }}
+        <p>Max file size 2 Mb</p>
     <button type="submit">Upload</button>
     </form>
 {% endblock %}

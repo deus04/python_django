@@ -1,6 +1,7 @@
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
+from .forms import UserBioForm, UploadFileForm
 
 # Create your views here.
 
@@ -17,20 +18,31 @@ def process_get_view(request: HttpRequest) -> HttpResponse:
 
 
 def user_form(request: HttpRequest) -> HttpResponse:
-    return render(request, 'requestdataapp/user-bio-form.html')
+    context = {
+        'form': UserBioForm(),
+    }
+    return render(request, 'requestdataapp/user-bio-form.html', context=context)
 
 def handle_file_upload(request: HttpRequest) -> HttpResponse:
-    if request.method == 'POST' and request.FILES.get('myfile'):
-        myfile = request.FILES['myfile']
-        if myfile.size > 2097152:
-            return exception_file_upload(request)
 
-        fs = FileSystemStorage()
-        filename = fs.save(myfile.name,myfile)
-        print('saved file', filename)
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            #myfile = request.FILES['myfile']
+            myfile = form.cleaned_data['file']
+            if myfile.size > 2097152:
+                return exception_file_upload(request)
 
-    return render(request, 'requestdataapp/file-upload.html')
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name,myfile)
+            print('saved file', filename)
+    else:
+        form = UploadFileForm()
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'requestdataapp/file-upload.html', context=context)
 
 def exception_file_upload(request):
     return render(request, 'requestdataapp/exception-file-upload.html')
-    # TODO и здесь организовывать отдельную функцию не обязательно? чтобы вывести страниу с ошибкой??
