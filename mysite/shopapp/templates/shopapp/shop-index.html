@@ -11,7 +11,7 @@
       <ul>
         {% for name, price in products %}
           <li>{{ name }} for ${{ price }}</li>
-          <span>{% if name|length == 7%}True {%else%} False{% endif %}</span>  #TODO Эта часть в уроке неверна. Фильтра Length_is больше нет в Django
+          <span>{% if name|length == 7%}True {%else%} False{% endif %}</span>
         {% empty %}
           No products here
         {% endfor %}
