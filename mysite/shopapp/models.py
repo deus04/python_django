@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from myauth.models import Profile
 
 
 class Product(models.Model):
@@ -11,7 +12,9 @@ class Product(models.Model):
     price = models.DecimalField(default=0, max_digits=8, decimal_places=2)
     discount = models.SmallIntegerField(default=0)
     created_ad = models.DateTimeField(auto_now_add=True)
+    created_by = models.OneToOneField(Profile, on_delete=models.CASCADE)
     archived = models.BooleanField(default=False)
+
 
 
     @property

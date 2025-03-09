@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 from .forms import ProductForm, OrderForm, GroupForm
 from .models import Product, Order
@@ -54,7 +55,11 @@ class ProductsListView(ListView):
     context_object_name = 'products'
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(UserPassesTestMixin, CreateView):
+    def test_func(self):
+        #return self.request.user.groups.filter(name='secret-group').exists()
+        return self.request.user.is_superuser
+
     model = Product
     fields = 'name', 'price', 'description', 'discount'
     success_url = reverse_lazy('shopapp:products-list')
@@ -84,7 +89,7 @@ class ProductDeleteView(DeleteView):
         return HttpResponseRedirect(success_url)
 
 
-class OrdersListView(ListView):
+class OrdersListView(LoginRequiredMixin, ListView):
     template_name = 'shopapp/orders-list.html'
     queryset = (
         Order.objects
@@ -94,7 +99,8 @@ class OrdersListView(ListView):
     context_object_name = 'orders'
 
 
-class OrderDetailView(DetailView):
+class OrderDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = 'shopapp.view_order'
     queryset = (
         Order.objects
         .select_related('user')
