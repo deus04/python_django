@@ -60,6 +60,12 @@ class ProductCreateView(UserPassesTestMixin, CreateView):
         #return self.request.user.groups.filter(name='secret-group').exists()
         return self.request.user.is_superuser
 
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        form.instance.created_by=self.object.user  #TODO не понимаю что тут получилось
+        return response
+
     model = Product
     fields = 'name', 'price', 'description', 'discount'
     success_url = reverse_lazy('shopapp:products-list')

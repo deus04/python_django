@@ -12,11 +12,15 @@
         <div>Price: {{ product.price }}</div>
         <div>Discount: {{ product.discount }}</div>
         <div>Created_ad: {{ product.created_ad }} </div>
-{#      <div>Created_by: {{ product.created_by.user.username }} </div> #}
+        <div>Created_by: {{ user.username }} </div>
         <div>Archived: {{ product.archived }}</div>
     </div>
     <div>
-        <a href="{% url 'shopapp:product-update' pk=product.pk %}">Update</a>
+        {% if perms.foo.is_superuser or perms.foo.change_product and perms.foo.change_product %}
+{#            здес должна быть проверка юзера. Как сравнить не понимаю#}
+            <a href="{% url 'shopapp:product-update' pk=product.pk %}">Update</a>
+
+        {% endif %}
     </div>
     <div>
         <a href="{% url 'shopapp:product-confirm-delete' pk=product.pk %}">Archive</a>

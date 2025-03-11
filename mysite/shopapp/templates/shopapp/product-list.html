@@ -6,7 +6,7 @@
 
 
 {% block body %}
-  <h1>Products: </h1>
+  <h1> Products: </h1>
     <div>
     {% if products %}
         {% for product in products %}
@@ -23,9 +23,11 @@
     </div>
 
     <div>
-        <a href={% url 'shopapp:product-create' %}>
+        {% if perms.foo.add_product %}
+        	<a href={% url 'shopapp:product-create' %}>
             Create a new product
-        </a>
+            </a>
+        {% endif %}
     </div>
 
 {% endblock %}
