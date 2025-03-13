@@ -12,12 +12,15 @@
         <div>Price: {{ product.price }}</div>
         <div>Discount: {{ product.discount }}</div>
         <div>Created_ad: {{ product.created_ad }} </div>
-        <div>Created_by: {{ user.username }} </div>
+        <div>Created_by: {{ user.username }} </div>   {#  вот здесь у меня тянется текущий юзер, а не создатель#}
+        {# почемуто он не сохроняется #}
         <div>Archived: {{ product.archived }}</div>
     </div>
     <div>
-        {% if perms.foo.is_superuser or perms.foo.change_product and perms.foo.change_product %}
-{#            здес должна быть проверка юзера. Как сравнить не понимаю#}
+        {% if perms.shopapp.is_superuser or perms.shopapp.change_product and request.user.username == user.username %}
+{#            здес должна быть проверка юзера.Не уверен что схема сравнения верная. Все еще не понимаю. #}
+            {# может знаете где можно почитать о переменных которые можно получить из реквеста. #}
+            {# я просто не могу понять в каком пространстве мы работаем и почти наугад тыкаю переменные и параметры #}
             <a href="{% url 'shopapp:product-update' pk=product.pk %}">Update</a>
 
         {% endif %}
