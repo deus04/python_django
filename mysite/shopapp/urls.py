@@ -14,6 +14,8 @@ from .views import (
     OrderDetailView,
     OrderUpdateView,
     OrderDeleteView,
+    ProductsDataExportView,
+    OrdersExportView,
 )
 
 
@@ -34,5 +36,7 @@ urlpatterns = [
 path('orders/<int:pk>/delete/', OrderDeleteView.as_view(), name='order-confirm-delete'),
 
     path('orders/create/', OrderCreateView.as_view(), name='order-create'),
+    path('products/export', ProductsDataExportView.as_view(), name='products-export'),
+    path('orders/export', OrdersExportView.as_view(), name='orders-export'),
 
 ]

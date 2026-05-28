@@ -1,0 +1,165 @@
+[
+  {
+    "model": "shopapp.product",
+    "pk": 1,
+    "fields": {
+      "name": "Laptop",
+      "description": "Lorem ipsum dolor sit amet",
+      "price": "1999.00",
+      "discount": 0,
+      "created_ad": "2024-12-23T23:34:54.848Z",
+      "created_by": 1,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 2,
+    "fields": {
+      "name": "Desktop (new)",
+      "description": "Its very smart",
+      "price": "2599.00",
+      "discount": 10,
+      "created_ad": "2024-12-23T23:34:54.848Z",
+      "created_by": 1,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 3,
+    "fields": {
+      "name": "Smartphone",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo felis vel laoreet lacinia. Nulla luctus volutpat nulla, quis feugiat erat consequat ut. Fusce consequat pulvinar est, et auctor tortor accumsan sed. Integer et ex ut justo blandit rhoncus nec vel erat. Proin sapien tellus, interdum eget sapien eu, vestibulum accumsan tellus. Nam in pretium arcu. Nulla tincidunt massa arcu, ac elementum justo iaculis et. Aliquam eu felis rhoncus, ultricies sapien a, maximus felis. Phasellus orci nibh, consectetur ut dui vel, ultrices facilisis magna. Maecenas dignissim justo eget tellus semper scelerisque sed nec nulla. Nam cursus metus at diam malesuada, quis pharetra tellus eleifend. Nunc est nulla, eleifend id nulla sit amet, consequat egestas nisi. Sed vitae est consequat, condimentum erat in, volutpat massa. Donec tortor sem, tincidunt nec pretium quis, tempor sed urna. Integer mauris augue, accumsan ac molestie sollicitudin, tempor vel erat. Sed sit amet orci sed augue varius aliquet sit amet in nibh.",
+      "price": "987.00",
+      "discount": 25,
+      "created_ad": "2024-12-23T23:34:54.848Z",
+      "created_by": 1,
+      "archived": true
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 4,
+    "fields": {
+      "name": "Tablet",
+      "description": "Great tablet!",
+      "price": "12314.00",
+      "discount": 0,
+      "created_ad": "2025-01-24T23:47:48.870Z",
+      "created_by": 1,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 6,
+    "fields": {
+      "name": "Phone 3",
+      "description": "wwwwwwWWWWwwwww",
+      "price": "123123.00",
+      "discount": 3,
+      "created_ad": "2025-02-20T14:12:22.211Z",
+      "created_by": 1,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 7,
+    "fields": {
+      "name": "New_productt",
+      "description": "Just a new product",
+      "price": "23322.99",
+      "discount": 1,
+      "created_ad": "2025-03-09T20:22:59.581Z",
+      "created_by": 1,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 8,
+    "fields": {
+      "name": "Product 1123",
+      "description": "123",
+      "price": "22222.01",
+      "discount": 0,
+      "created_ad": "2025-03-10T20:01:54.148Z",
+      "created_by": 1,
+      "archived": true
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 9,
+    "fields": {
+      "name": "R pod",
+      "description": "Something new!",
+      "price": "4112.00",
+      "discount": 0,
+      "created_ad": "2025-03-13T00:54:04.207Z",
+      "created_by": 1,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.product",
+    "pk": 10,
+    "fields": {
+      "name": "Simple product",
+      "description": "product 1",
+      "price": "1.00",
+      "discount": 0,
+      "created_ad": "2025-03-13T01:07:47.672Z",
+      "created_by": 2,
+      "archived": false
+    }
+  },
+  {
+    "model": "shopapp.order",
+    "pk": 2,
+    "fields": {
+      "delivery_address": "1600 Pennsylvania Avenue NW, Washington",
+      "promocode": "SALE123",
+      "created_at": "2024-12-24T16:17:31.474Z",
+      "user": 1,
+      "products": [
+        2,
+        1,
+        3,
+        4
+      ]
+    }
+  },
+  {
+    "model": "shopapp.order",
+    "pk": 3,
+    "fields": {
+      "delivery_address": "qwerqew",
+      "promocode": "123",
+      "created_at": "2025-01-25T01:52:38.739Z",
+      "user": 1,
+      "products": [
+        1,
+        3
+      ]
+    }
+  },
+  {
+    "model": "shopapp.order",
+    "pk": 4,
+    "fields": {
+      "delivery_address": "some address",
+      "promocode": "adadad",
+      "created_at": "2025-02-20T14:08:09.126Z",
+      "user": 1,
+      "products": [
+        2,
+        1,
+        3
+      ]
+    }
+  }
+]
+
