@@ -15,7 +15,19 @@
         <p>Last name: {{ user.last_name }}</p>
         <p>Email: {{ user.email }}</p>
         <p>Bio: {{ user.profile.bio }}</p>
+            {% if user.profile.avatar %}
+                <p>Avatar:</p>
+                <img src="{{ user.profile.avatar.url }}" alt="Avatar" width="200">
+            {% else %}
+                <p>No avatar uploaded</p>
+            {% endif %}
     {% else %}
         <h2>User is anonymous</h2>
     {% endif %}
+        <h3>Upload new avatar</h3>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Save avatar</button>
+            </form>
 {% endblock %}

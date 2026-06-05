@@ -10,7 +10,7 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 
 from .forms import ProductForm, OrderForm, GroupForm
-from .models import Product, Order
+from .models import Product, Order, ProductImage
 
 
 class ShopIndexView(View):
@@ -44,7 +44,8 @@ class GroupsListView(View):
 
 class ProductDetailsView(DetailView):
     template_name = 'shopapp/product-details.html'
-    model = Product
+    # model = Product
+    queryset = Product.objects.prefetch_related('images')
     context_object_name = 'product'
 
 
@@ -65,21 +66,31 @@ class ProductCreateView(UserPassesTestMixin, CreateView):
         return super().form_valid(form)
 
     model = Product
-    fields = 'name', 'price', 'description', 'discount'
+    fields = 'name', 'price', 'description', 'discount', 'preview'
     success_url = reverse_lazy('shopapp:products-list')
     template_name = 'shopapp/product_create.html'
 
 
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = 'name', 'price', 'description', 'discount'
+    # fields = 'name', 'price', 'description', 'discount', 'preview'
     template_name_suffix = '_update_form'
+    form_class = ProductForm
 
     def get_success_url(self):
         return reverse(
             'shopapp:product-details',
             kwargs={'pk':self.object.pk}
         )
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        for image in form.files.getlist('images'):
+            ProductImage.objects.create(
+                product=self.object,
+                image=image,
+            )
+        return response
 
 
 class ProductDeleteView(DeleteView):
@@ -157,7 +168,10 @@ class ProductsDataExportView(View):
         return JsonResponse({'products': products_data})
 
 
-class OrdersExportView(View):
+class OrdersExportView(UserPassesTestMixin, View):
+
+    def test_func(self):
+        return self.request.user.is_staff
 
     def get(self, request: HttpRequest) -> JsonResponse:
         orders = Order.objects.order_by('pk').all()

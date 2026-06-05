@@ -9,6 +9,9 @@ from .views import (
     logout_view,
     MyLogoutView,
     AboutMeView,
+    UsersListView,
+    UserDetailView,
+    ProfileUpdateView,
     RegisterView,
     FooBarView,
 )
@@ -32,7 +35,11 @@ urlpatterns = [
     path('cookie/set/', set_cookie_view, name='cookie-set'),
     path('session/set/', set_session_view, name='session-set'),
     path('session/get/', get_session_view, name='session-get'),
-    path('foo-bar/', FooBarView.as_view(), name='foo-bar')
+    path('foo-bar/', FooBarView.as_view(), name='foo-bar'),
+    path('users/', UsersListView.as_view(), name='users-list'),
+    path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
+    path('profiles/<int:pk>/update/', ProfileUpdateView.as_view(), name='profile-update'),
+
 ]
 
 

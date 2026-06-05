@@ -1,13 +1,16 @@
 from django.contrib.auth.decorators import login_required, permission_required, user_passes_test
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, UpdateView, ListView, DetailView
 
+from .forms import ProfileAvatarForm
 from .models import Profile
 
 
@@ -30,8 +33,28 @@ def login_view(request: HttpRequest) -> HttpResponse:
     return render(request, 'myauth/login.html', {'error': 'Invalid login credentials'})
 
 
-class AboutMeView(TemplateView):
+class AboutMeView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    form_class = ProfileAvatarForm
     template_name = 'myauth/about-me.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user.profile
+
+    def get_success_url(self):
+        return reverse('myauth:about-me')
+
+
+class UsersListView(ListView):
+    model = User
+    template_name = 'myauth/users-list.html'
+    context_object_name = 'users'
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'myauth/user-detail.html'
+    context_object_name = 'user_object'
 
 
 class RegisterView(CreateView):
@@ -54,6 +77,24 @@ class RegisterView(CreateView):
         return response
 
 
+class ProfileUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Profile
+    form_class = ProfileAvatarForm
+    template_name = 'myauth/profile-update.html'
+
+    def test_func(self):
+        profile = self.get_object()
+
+        return (
+            self.request.user.is_staff
+            or profile.user == self.request.user
+        )
+
+    def get_success_url(self):
+        return reverse(
+            'myauth:user-detail',
+            kwargs={'pk': self.object.user.pk}
+        )
 
 
 def logout_view(request: HttpRequest):
@@ -96,24 +137,3 @@ def get_session_view(request:HttpRequest) -> HttpResponse:
 class FooBarView(View):
     def get(self, request:HttpRequest) -> JsonResponse:
         return JsonResponse({"foo": "bar", "spam": "eggs"})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

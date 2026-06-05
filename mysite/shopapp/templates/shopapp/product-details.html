@@ -14,6 +14,23 @@
         <div>Created_ad: {{ product.created_ad }} </div>
         <div>Created_by: {{ product.created_by.username }} </div>
         <div>Archived: {{ product.archived }}</div>
+
+        {% if product.preview %}
+            <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}">
+        {% endif %}
+
+        <h3>Images:</h3>
+        <div>
+            {% for img in product.images.all %}
+                <div>
+                    <img src="{{ img.image.url }}" alt="{{ img.image.name }}">
+                    <div>{{ img.description }}</div>
+                </div>
+            {% empty %}
+                <div>No images uploaded yet</div>
+            {% endfor %}
+        </div>
+
     </div>
     <div>
         {% if perms.shopapp.is_superuser or perms.shopapp.change_product and product.created_by.username == user.username %}
