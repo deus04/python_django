@@ -9,6 +9,11 @@ def product_preview_directory_path(instance: "Product", filename: str) -> str:
     return f'products/product_{pk}/preview/{filename}'
 
 class Product(models.Model):
+    '''
+    Модель Product представляет товар, который можно продавать в магазине
+
+    Заказы тут: :model:`shopapp.Orderсв`
+    '''
     class Meta:
         ordering = ['name', 'price']
 
