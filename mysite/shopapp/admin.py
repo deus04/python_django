@@ -1,9 +1,16 @@
+import csv
+import io
 from django.contrib import admin
 from django.http import HttpRequest
 from django.db.models import QuerySet
+from django.urls import path
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 
 from .models import Product, Order, ProductImage
 from .admin_mixins import ExportAsCSVMixin
+
+from shopapp.forms import OrderImportForm
 
 
 class OrderInline(admin.TabularInline):
@@ -73,6 +80,8 @@ class ProductInline(admin.StackedInline):
 
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
+    change_list_template = "shopapp/orders_changelist.html"
+
     inlines = [
         ProductInline,
     ]
@@ -83,3 +92,54 @@ class OrderAdmin(admin.ModelAdmin):
 
     def user_verbose(self, obj: Order):
         return obj.user.first_name or obj.user.username
+
+    def get_urls(self):
+        urls = super().get_urls()
+        custom_urls = [
+            path(
+                "import-csv/",
+                self.admin_site.admin_view(self.import_csv),
+                name="shopapp_order_import",
+            ),
+        ]
+        return custom_urls + urls
+
+    def import_csv(self, request):
+        if request.method == "GET":
+            form = OrderImportForm()
+            return render(
+                request,
+                "shopapp/csv_form.html",
+                {"form": form},
+            )
+
+        form = OrderImportForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            file = form.cleaned_data["file"]
+
+            decoded_file = file.read().decode("utf-8")
+            reader = csv.DictReader(io.StringIO(decoded_file))
+
+            for row in reader:
+                user = User.objects.get(username=row["user"])
+
+                order = Order.objects.create(
+                    delivery_address=row["delivery_address"],
+                    promocode=row["promocode"],
+                    user=user,
+                )
+
+                product_ids = row["products"].split(";")
+                products = Product.objects.filter(id__in=product_ids)
+
+                order.products.set(products)
+
+            return redirect("admin:shopapp_order_changelist")
+
+        return render(
+            request,
+            "shopapp/csv_form.html",
+            {"form": form},
+        )
+

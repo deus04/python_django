@@ -34,3 +34,7 @@ class GroupForm(ModelForm):
     class Meta:
         model = Group
         fields = 'name',
+
+
+class OrderImportForm(forms.Form):
+    file = forms.FileField()

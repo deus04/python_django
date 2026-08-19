@@ -13,6 +13,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.contrib.syndication.views import Feed
+
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, OpenApiResponse
 
@@ -266,3 +268,21 @@ class OrdersExportView(UserPassesTestMixin, View):
         ]
 
         return JsonResponse({'orders': orders_data})
+
+
+class LatestProductsFeed(Feed):
+    title = 'Latest products'
+    description = 'New products in our shop'
+    link = '/shop/products/'
+
+    def items(self):
+        return Product.objects.order_by('-created_ad')[:5]
+
+    def item_title(self, item):
+        return item.name
+
+    def item_description(self, item):
+        return item.description
+
+    def item_link(self, item):
+        return item.get_absolute_url()

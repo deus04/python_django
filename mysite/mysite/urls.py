@@ -19,9 +19,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
 
+from shopapp.sitemaps import ShopSitemap
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
+
+sitemaps = {
+    'shop': ShopSitemap,
+}
 
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
@@ -35,6 +41,7 @@ urlpatterns = [
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('api/', include('myapiapp.urls')),
     path("blog/", include("blogapp.urls")),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django-sitemap'),
 
 ]
 
