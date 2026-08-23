@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<django-objects version="1.0">
+    <object model="shopapp.product" pk="1">
+        <field name="name" type="CharField">Laptop</field>
+        <field name="description" type="TextField">some description</field>
+        <field name="price" type="DecimalField">1999.00</field>
+        <field name="discount" type="SmallIntegerField">0</field>
+        <field name="created_at" type="DateTimeField">2022-07-24T11:20:36.181000+00:00</field>
+        <field name="archived" type="BooleanField">False</field>
+        <field name="preview" type="FileField"></field>
+    </object>
+    <object model="shopapp.product" pk="2">
+        <field name="name" type="CharField">Desktop (new)</field>
+        <field name="description" type="TextField">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+            molestie purus libero, feugiat cursus ligula placerat sagittis. In tristique condimentum nibh, eget pulvinar
+            justo hendrerit vitae. Cras faucibus metus quam, at congue lacus varius id. Sed dapibus quam neque, id
+            efficitur justo cursus ac. Phasellus in felis bibendum, tincidunt quam non, scelerisque mauris. Maecenas nec
+            bibendum diam. Aenean at vestibulum diam. Cras ac dolor placerat, feugiat libero venenatis, aliquet eros.
+            Nam eget vehicula nisl. Nulla dolor nulla, porta non purus at, suscipit imperdiet eros. Nulla sed tellus
+            libero. Donec tempor tortor at dui interdum luctus. Nam porta diam ut velit luctus tempor. Maecenas
+            tristique a quam eu lobortis.
+            Phone: +123456
+        </field>
+        <field name="price" type="DecimalField">2399.00</field>
+        <field name="discount" type="SmallIntegerField">15</field>
+        <field name="created_at" type="DateTimeField">2022-07-24T11:20:36.181000+00:00</field>
+        <field name="archived" type="BooleanField">False</field>
+        <field name="preview" type="FileField">products/product_2/preview/desktop-1.jpg</field>
+    </object>
+    <object model="shopapp.product" pk="3">
+        <field name="name" type="CharField">Smartphone</field>
+        <field name="description" type="TextField"></field>
+        <field name="price" type="DecimalField">987.00</field>
+        <field name="discount" type="SmallIntegerField">10</field>
+        <field name="created_at" type="DateTimeField">2022-07-24T11:20:36.181000+00:00</field>
+        <field name="archived" type="BooleanField">False</field>
+        <field name="preview" type="FileField">products/product_3/preview/smartphone-1.jpg</field>
+    </object>
+    <object model="shopapp.product" pk="5">
+        <field name="name" type="CharField">Smartphone 1</field>
+        <field name="description" type="TextField"></field>
+        <field name="price" type="DecimalField">199.00</field>
+        <field name="discount" type="SmallIntegerField">10</field>
+        <field name="created_at" type="DateTimeField">2023-03-18T08:16:18.969851+00:00</field>
+        <field name="archived" type="BooleanField">False</field>
+        <field name="preview" type="FileField"></field>
+    </object>
+    <object model="shopapp.product" pk="6">
+        <field name="name" type="CharField">Smartphone 2</field>
+        <field name="description" type="TextField"></field>
+        <field name="price" type="DecimalField">299.00</field>
+        <field name="discount" type="SmallIntegerField">10</field>
+        <field name="created_at" type="DateTimeField">2023-03-18T08:16:18.969888+00:00</field>
+        <field name="archived" type="BooleanField">False</field>
+        <field name="preview" type="FileField"></field>
+    </object>
+    <object model="shopapp.product" pk="7">
+        <field name="name" type="CharField">Smartphone 3</field>
+        <field name="description" type="TextField"></field>
+        <field name="price" type="DecimalField">399.00</field>
+        <field name="discount" type="SmallIntegerField">10</field>
+        <field name="created_at" type="DateTimeField">2023-03-18T08:16:18.969903+00:00</field>
+        <field name="archived" type="BooleanField">False</field>
+        <field name="preview" type="FileField"></field>
+    </object>
+</django-objects>
