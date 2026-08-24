@@ -6,7 +6,7 @@
 from timeit import default_timer
 
 import requests
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.urls import reverse_lazy
@@ -14,6 +14,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.syndication.views import Feed
+from django.core.cache import cache
 
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema, OpenApiResponse
@@ -192,6 +193,53 @@ class OrdersListView(LoginRequiredMixin, ListView):
     )
     context_object_name = 'orders'
 
+
+class UserOrdersListView(LoginRequiredMixin, ListView):
+    template_name = 'shopapp/orders-list.html'
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        self.owner = get_object_or_404(User, pk=self.kwargs['user_id'])
+
+        return (
+            Order.objects
+            .filter(user=self.owner)
+            .select_related('user')
+            .prefetch_related('products')
+        )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['owner'] = self.owner
+        return context
+
+
+class UserOrdersExportView(LoginRequiredMixin, View):
+    def get(self, request: HttpRequest, user_id: int) -> JsonResponse:
+        cache_key = f'user_orders_export_{user_id}'
+
+        cached_data = cache.get(cache_key)
+
+        if cached_data is not None:
+            return JsonResponse(cached_data)
+
+        owner = get_object_or_404(User, pk=user_id)
+
+        orders = (
+            Order.objects
+            .filter(user=owner)
+            .order_by('pk')
+        )
+
+        orders_data = OrderSerializer(orders, many=True).data
+
+        data = {
+            'orders': orders_data,
+        }
+
+        cache.set(cache_key, data, 300)
+
+        return JsonResponse(data)
 
 class OrderDetailView(PermissionRequiredMixin, DetailView):
     permission_required = 'shopapp.view_order'
