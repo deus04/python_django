@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #f6f7f9;
+        }
+
+        * {
+        font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-size: 45px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        header {
+            height: 100px;
+            padding: 0 40px;
+        }
+
+        header > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            width: 50%;
+        }
+
+        .header-left > a {
+            margin-right: 10%;
+            color: black;
+            text-decoration: none;
+        }
+
+        .header-left > a:hover {
+            text-decoration: underline;
+        }
+
+        .header-right {
+            width: 40%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+        }
+
+        .header-right > span {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .fixed-container {
+            max-width: 1000px;
+            height: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        section {
+            padding: 40px;
+        }
+
+        .first-block {
+            height: 300px;
+
+        }
+
+        .first-block > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            background-image: url("Materials/man/man.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: right center;
+
+        }
+
+        .services {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .services > div {
+            width: 200px;
+        }
+
+        .services img {
+
+            width: 100%;
+        }
+
+        .simples > div {
+            width: 300px;
+        }
+
+
+
+        .price-info {
+            background-color: #3d52fe;
+            color: white;
+        }
+
+        .blue-text {
+            padding-left: 0;
+        }
+
+        .light-button {
+            border: 1px solid black;
+            background-color: transparent;
+        }
+
+        .dark-button {
+            background-color: #3d52fe;
+            border: 1px solid #3d52fe;
+            color: white;
+        }
+
+        button {
+            padding: 10px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            padding: 40px;
+        }
+
+        .footer-left {
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .footer-href > a {
+            color: black;
+            text-decoration: none;
+        }
+
+
+        .footer-href > a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-center {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+
+        footer div {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .footer-right > div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .social-medias {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .social-medias a {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-medias img {
+            max-width: 100%;
+            max-height: 100%;
+
+        }
+
+        .popup-container {
+            background-color: #000000b3;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: white;
+            width: 300px;
+            height: 300px;
+            padding: 30px;
+            border-radius: 5px;
+        }
+
+        .popup > div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+    </style>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        var container =
+    document.querySelector('.popup-container');
+        var popupButtons =
+    document.querySelectorAll('.open-popup');
+        for (let i = 0; i < popupButtons.length; i++) {
+            popupButtons[i].addEventListener('click', function(){
+                container.style.display = 'flex';
+        });
+    }
+
+
+    container.addEventListener('click', function(event){
+        var closeButton = document.querySelector('.close-popup');
+        closeButton.addEventListener('click', function (){
+            container.style.display = 'none';
+        })
+        if(event.target == container) {
+            container.style.display = 'none';
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="popup-container">
+        <form class="popup">
+            <div>
+                <p>Имя</p>
+                <input type="text" placeholder="Введите ваше имя">
+            </div>
+            <div>
+                <p>E-mail</p>
+                <input type="text" placeholder="Введите e-mail">
+            </div>
+            <div>
+                <button class="dark-button close-popup">Отправить</button>
+            </div>
+        </form>
+    </div>
+    <header>
+        <div class="fixed-container">
+            <div class="header-left">
+                <a href="#" target="_blank">Услуги</a>
+                <a href="#" target="_blank">Портфолио</a>
+                <a href="#" target="_blank">Стоимость</a>
+            </div>
+            <div class="header-right">
+                <span>+7 (777) 777-77-77</span>
+                <button class="light-button open-popup">Заказать звонок</button>
+            </div>
+        </div>
+    </header>
+    <section class="first-block">
+        <div class="fixed-container">
+            <h1>Максим Бердоносов</h1>
+            <p>Frontend-разработчик и веб-верстальщик</p>
+            <button class="dark-button open-popup">Узнать больше</button>
+        </div>
+    </section>
+    <section>
+        <div class="fixed-container">
+            <h2>Что я делаю</h2>
+            <div class="services">
+                <div>
+                    <img src="Materials/icons/1.png" alt="">
+                    Верстка лэндинг-страницы и сайтов любой сложности
+                </div>
+                <div>
+                    <img src="Materials/icons/2.png" alt="">
+                    Адаптивная верстка под все браузеры и любые устройства
+                </div>
+                <div>
+                    <img src="Materials/icons/3.png" alt="">
+                    Frontend-разработка и программирование
+                </div>
+                <div>
+                    <img src="Materials/icons/4.png" alt="">
+                    Исправление и доработка существующей верстки
+                </div>
+            </div>
+            <button class="light-button open-popup">Узнать стоимость</button>
+        </div>
+    </section>
+    <section>
+        <div class="fixed-container">
+            <h2>Примеры работ</h2>
+            <div class="services simples">
+                <div>
+                    <img src="Materials/examples/e1.png" alt="">
+                    Сайт по психологии
+                </div>
+                <div>
+                    <img src="Materials/examples/e2.png" alt="">
+                    Сайт магазина детской одежды
+                </div>
+                <div>
+                    <img src="Materials/examples/e3.png" alt="">
+                    Сайт магазина "Рыболов"
+                </div>
+            </div>
+            <button class="light-button open-popup">Заказать проект</button>
+        </div>
+    </section>
+    <section class="price-info">
+        <div class="fixed-container blue-text">
+            <h2>Адаптивная верстка под все устройства и размеры</h2>
+            <p>*Срок и стоимость могут отличаться от заявленных и рассчитыватются индивидульно, в зависимоти от сложности задачи*</p>
+        </div>
+    </section>
+    <footer>
+        <div class="fixed-container">
+            <div class="footer-left footer-href">
+                <a href="#">Услуги</a>
+                <a href="#">Портфолио</a>
+                <a href="#">Стоимость</a>
+            </div>
+            <div class="footer-center footer-href">
+                <a href="#">berdonosovme@gmail.com</a>
+                <p>+7 (777) 777-77-77</p>
+            </div>
+            <div class="footer-right">
+                <button class="light-button open-popup">Заказать звонок</button>
+                <div class="social-medias">
+                    <a href="#">
+                        <img src="Materials/Social%20media/fb.png" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="Materials/Social%20media/inst.png" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="Materials/Social%20media/telegram.png" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="Materials/Social%20media/vk.png" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="Materials/Social%20media/you.png" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

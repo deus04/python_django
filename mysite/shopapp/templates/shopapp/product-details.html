@@ -1,0 +1,46 @@
+{% extends 'shopapp/base.html' %}
+
+{% block title %}
+	Product #{{ product.pk }}
+{% endblock %}
+
+{% block body %}
+	<h1>Product <strong>{{ product.pk }}</strong></h1>
+    <div>
+        <div>Name: {{ product.name }}</div>
+        <div>Description: <em>{{ product.description }}</em></div>
+        <div>Price: {{ product.price }}</div>
+        <div>Discount: {{ product.discount }}</div>
+        <div>Created_ad: {{ product.created_ad }} </div>
+        <div>Created_by: {{ product.created_by.username }} </div>
+        <div>Archived: {{ product.archived }}</div>
+
+        {% if product.preview %}
+            <img src="{{ product.preview.url }}" alt="{{ product.preview.name }}">
+        {% endif %}
+
+        <h3>Images:</h3>
+        <div>
+            {% for img in product.images.all %}
+                <div>
+                    <img src="{{ img.image.url }}" alt="{{ img.image.name }}">
+                    <div>{{ img.description }}</div>
+                </div>
+            {% empty %}
+                <div>No images uploaded yet</div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <div>
+        {% if perms.shopapp.is_superuser or perms.shopapp.change_product and product.created_by.username == user.username %}
+            <a href="{% url 'shopapp:product-update' pk=product.pk %}">Update</a>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{% url 'shopapp:product-confirm-delete' pk=product.pk %}">Archive</a>
+    </div>
+    <div>
+        <a href="{% url 'shopapp:products-list' %}">Return to products list</a>
+    </div>
+{% endblock %}

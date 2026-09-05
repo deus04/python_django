@@ -1,0 +1,273 @@
+[
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "axample_goup",
+    "permissions": [
+      9,
+      10,
+      11,
+      12
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "another_group",
+    "permissions": [
+      17,
+      18,
+      19,
+      20
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 3,
+  "fields": {
+    "name": "some_group",
+    "permissions": []
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 4,
+  "fields": {
+    "name": "profile_manager",
+    "permissions": [
+      36
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 5,
+  "fields": {
+    "name": "qwerty",
+    "permissions": [
+      17,
+      33,
+      21
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 6,
+  "fields": {
+    "name": "product_manager",
+    "permissions": [
+      25
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$0n4pk5rDIxPxPjivfMXxaJ$2nM5PTVHumA61GSswlFRGHVv9UmsmVJtqIijPKjbzZo=",
+    "last_login": "2025-03-13T13:33:54.559Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "John",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-12-09T23:18:31Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$1IjaTxm8qXLz26gCy3lntq$4cjBKFRxXhQP30Fx4PecIxCxt1yC1BjWoBQig2nqK7A=",
+    "last_login": "2025-03-13T13:35:11.189Z",
+    "is_superuser": false,
+    "username": "sam",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-03-05T15:06:47Z",
+    "groups": [
+      4,
+      5,
+      6
+    ],
+    "user_permissions": [
+      4,
+      25,
+      26,
+      27,
+      28
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$KjKqACUFxtWiBkoSDRyGtg$KCEPq1HlQkLGAc9Zg/SXW5E+JTWhaVz0td6i2WgnvaI=",
+    "last_login": "2025-03-05T15:15:03Z",
+    "is_superuser": false,
+    "username": "john",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-05T15:15:01Z",
+    "groups": [],
+    "user_permissions": [
+      32
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$8xIqWlFVzHgBhwcGWODaGn$vyJuQDw11nqw9+Tza/z7XOD0c8SYmRldY7TFEesPxyo=",
+    "last_login": "2025-03-06T21:44:52.169Z",
+    "is_superuser": false,
+    "username": "nick",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-03-06T21:44:49.180Z",
+    "groups": [
+      4
+    ],
+    "user_permissions": [
+      4
+    ]
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 1,
+  "fields": {
+    "name": "Laptop",
+    "description": "Lorem ipsum dolor sit amet",
+    "price": "1999.00",
+    "discount": 0,
+    "created_ad": "2024-12-23T23:34:54.848Z",
+    "created_by": 1,
+    "archived": false
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 2,
+  "fields": {
+    "name": "Desktop (new)",
+    "description": "Its very smart",
+    "price": "2599.00",
+    "discount": 10,
+    "created_ad": "2024-12-23T23:34:54.848Z",
+    "created_by": 1,
+    "archived": false
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 3,
+  "fields": {
+    "name": "Smartphone",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur commodo felis vel laoreet lacinia. Nulla luctus volutpat nulla, quis feugiat erat consequat ut. Fusce consequat pulvinar est, et auctor tortor accumsan sed. Integer et ex ut justo blandit rhoncus nec vel erat. Proin sapien tellus, interdum eget sapien eu, vestibulum accumsan tellus. Nam in pretium arcu. Nulla tincidunt massa arcu, ac elementum justo iaculis et. Aliquam eu felis rhoncus, ultricies sapien a, maximus felis. Phasellus orci nibh, consectetur ut dui vel, ultrices facilisis magna. Maecenas dignissim justo eget tellus semper scelerisque sed nec nulla. Nam cursus metus at diam malesuada, quis pharetra tellus eleifend. Nunc est nulla, eleifend id nulla sit amet, consequat egestas nisi. Sed vitae est consequat, condimentum erat in, volutpat massa. Donec tortor sem, tincidunt nec pretium quis, tempor sed urna. Integer mauris augue, accumsan ac molestie sollicitudin, tempor vel erat. Sed sit amet orci sed augue varius aliquet sit amet in nibh.",
+    "price": "987.00",
+    "discount": 25,
+    "created_ad": "2024-12-23T23:34:54.848Z",
+    "created_by": 1,
+    "archived": true
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 4,
+  "fields": {
+    "name": "Tablet",
+    "description": "Great tablet!",
+    "price": "12314.00",
+    "discount": 0,
+    "created_ad": "2025-01-24T23:47:48.870Z",
+    "created_by": 1,
+    "archived": false
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 6,
+  "fields": {
+    "name": "Phone 3",
+    "description": "wwwwwwWWWWwwwww",
+    "price": "123123.00",
+    "discount": 3,
+    "created_ad": "2025-02-20T14:12:22.211Z",
+    "created_by": 1,
+    "archived": false
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 7,
+  "fields": {
+    "name": "New_productt",
+    "description": "Just a new product",
+    "price": "23322.99",
+    "discount": 1,
+    "created_ad": "2025-03-09T20:22:59.581Z",
+    "created_by": 1,
+    "archived": false
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 8,
+  "fields": {
+    "name": "Product 1123",
+    "description": "123",
+    "price": "22222.01",
+    "discount": 0,
+    "created_ad": "2025-03-10T20:01:54.148Z",
+    "created_by": 1,
+    "archived": true
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 9,
+  "fields": {
+    "name": "R pod",
+    "description": "Something new!",
+    "price": "4112.00",
+    "discount": 0,
+    "created_ad": "2025-03-13T00:54:04.207Z",
+    "created_by": 1,
+    "archived": false
+  }
+},
+{
+  "model": "shopapp.product",
+  "pk": 10,
+  "fields": {
+    "name": "Simple product",
+    "description": "product 1",
+    "price": "1.00",
+    "discount": 0,
+    "created_ad": "2025-03-13T01:07:47.672Z",
+    "created_by": 2,
+    "archived": false
+  }
+}
+]
